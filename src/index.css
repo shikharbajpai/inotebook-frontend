@@ -11,3 +11,131 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*==================== BASE ====================*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 16px;
+  overflow: auto !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+i {
+  cursor: pointer;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control, .btn {
+  font-size: 1rem;
+}
+
+/*==================== NOTES  ====================*/
+.no-notes-container {
+  padding: 20px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-notes-icon {
+  font-size: 3rem;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
+
+.no-notes-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.no-notes-description {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/*==================== NOTE CARD  ====================*/
+.note-card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.note-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.note-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.note-card-footer .btn-link {
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.note-card-footer .text-primary {
+  color: #007bff;
+}
+
+.note-card-footer .text-danger {
+  color: #dc3545;
+}
+
+
