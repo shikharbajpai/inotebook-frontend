@@ -7,9 +7,11 @@ import NoteState from "./context/notes/notestate";
 import AuthState from "./context/auth/authstate";
 import { Login } from "./components/pages/Login";
 import { Signup } from "./components/pages/Signup";
+import ForgotPassword from "./components/pages/ForgotPassword";
+import ResetPassword from "./components/pages/ResetPassword";
 import Alert from "./components/common/Alert";
 import Footer from './components/layout/Footer';
-import './App.css'; // Import CSS file for layout
+import './App.css';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -32,6 +34,8 @@ function App() {
                 <Route exact path="/about" element={<About clearAlert={clearAlert} />} />
                 <Route exact path="/login" element={<Login setAlert={setAlert} clearAlert={clearAlert} />} />
                 <Route exact path="/signup" element={<Signup setAlert={setAlert} clearAlert={clearAlert} />} />
+                <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+                <Route exact path="/resetpassword" element={<ResetPassword />} />
               </Routes>
             </div>
             <Footer />

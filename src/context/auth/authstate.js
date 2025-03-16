@@ -4,9 +4,11 @@ import AuthContext from './authContext';
 
 const AuthState = (props) => {
   const baseURL = config.API_BASE_URL || '';
-  const initialToken = localStorage.getItem('token') || ''; // Retrieve token from localStorage if available
+  const initialToken = localStorage.getItem('token') || '';
+  const initialResetToken = '';
 
   const [token, setToken] = useState(initialToken);
+  const [resetToken, setResetToken] = useState(initialResetToken);
   const [error, setError] = useState(null); // State for managing errors
 
   const handleResponse = async (response) => {
@@ -94,8 +96,61 @@ const AuthState = (props) => {
     localStorage.removeItem('token');
   };
 
+  // Send reset token
+  const sendResetToken = async (email) => {
+    const url = `${baseURL}/api/auth/forgotpassword`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      if (data && data.data && data.data.records) {
+        setResetToken(data.data.records.resetToken);
+        return true;
+      } else {
+        throw new Error('Failed to retrieve reset token');
+      }
+    } catch (error) {
+      setError(error.message);
+      return false;
+    }
+  };
+
+  // Reset password
+  const resetPassword = async (resetToken, newPassword) => {
+    const url = `${baseURL}/api/auth/resetpassword`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': resetToken,
+        },
+        body: JSON.stringify({ resetToken, newPassword }),
+      });
+
+      const data = await response.json();
+      if (data && data?.data?.records?.message) {
+        return data; // Return any relevant data or success message
+      } else {
+        throw new Error('Failed to reset password');
+      }
+    } catch (error) {
+      setError(error.message);
+      throw error; // Rethrow to handle in the component
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken, login, register, logout, error, setError }}>
+    <AuthContext.Provider value={{
+      token, setToken, resetToken, setResetToken, login, register, logout, sendResetToken,
+      resetPassword, error, setError
+    }}>
       {props.children}
     </AuthContext.Provider>
   );
